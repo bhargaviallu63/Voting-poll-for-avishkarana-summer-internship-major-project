@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+width:500px;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,.3);
+}
+
+h2{
+text-align:center;
+color:#2575fc;
+margin-bottom:20px;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2575fc;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5fd0;
+}
+
+#msg{
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+color:green;
+}
+
+a{
+display:block;
+text-align:center;
+margin-top:20px;
+text-decoration:none;
+color:#2575fc;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>⭐ Feedback Form</h2>
+
+<input type="text" id="name" placeholder="Your Name">
+
+<select id="rating">
+<option value="">Select Rating</option>
+<option>⭐⭐⭐⭐⭐ Excellent</option>
+<option>⭐⭐⭐⭐ Good</option>
+<option>⭐⭐⭐ Average</option>
+<option>⭐⭐ Poor</option>
+<option>⭐ Very Poor</option>
+</select>
+
+<textarea id="feedback" placeholder="Write your feedback here..."></textarea>
+
+<button onclick="submitFeedback()">
+Submit Feedback
+</button>
+
+<div id="msg"></div>
+
+<a href="dashboard.html">⬅ Back to Dashboard</a>
+
+</div>
+
+<script>
+
+function submitFeedback(){
+
+let name=document.getElementById("name").value;
+let rating=document.getElementById("rating").value;
+let feedback=document.getElementById("feedback").value;
+
+if(name==""||rating==""||feedback==""){
+
+alert("Please fill all fields.");
+
+return;
+
+}
+
+let feedbacks=JSON.parse(localStorage.getItem("feedbacks"))||[];
+
+feedbacks.push({
+name:name,
+rating:rating,
+feedback:feedback
+});
+
+localStorage.setItem("feedbacks",JSON.stringify(feedbacks));
+
+document.getElementById("msg").innerHTML=
+"✅ Thank you! Your feedback has been submitted.";
+
+document.getElementById("name").value="";
+document.getElementById("rating").value="";
+document.getElementById("feedback").value="";
+
+}
+
+</script>
+
+</body>
+</html>
