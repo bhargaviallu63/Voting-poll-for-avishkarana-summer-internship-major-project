@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Online Voting System</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🗳️ Smart Vote
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="login.html">Login</a>
+<a href="register.html">Register</a>
+<a href="results.html">Results</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Online Voting System</h1>
+
+<p>
+
+Vote securely from anywhere.
+
+One Person • One Vote • One Future
+
+</p>
+
+<a href="login.html" class="btn">
+
+Vote Now
+
+</a>
+
+</div>
+
+<div class="hero-image">
+
+<img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=700" alt="Voting">
+
+</div>
+
+</section>
+
+<section class="features">
+
+<h2>Why Choose Smart Vote?</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>🔒 Secure</h3>
+
+<p>
+
+Your vote is protected using secure authentication.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>⚡ Fast</h3>
+
+<p>
+
+Cast your vote in less than one minute.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📊 Live Results</h3>
+
+<p>
+
+Instant vote counting with beautiful charts.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📱 Responsive</h3>
+
+<p>
+
+Works perfectly on mobile, tablet and desktop.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="steps">
+
+<h2>How It Works</h2>
+
+<div class="step-box">
+
+<div>
+
+<h3>1️⃣ Register</h3>
+
+<p>Create your voter account.</p>
+
+</div>
+
+<div>
+
+<h3>2️⃣ Login</h3>
+
+<p>Login using your voter ID.</p>
+
+</div>
+
+<div>
+
+<h3>3️⃣ Vote</h3>
+
+<p>Select your candidate and submit.</p>
+
+</div>
+
+<div>
+
+<h3>4️⃣ Results</h3>
+
+<p>View election results after voting.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 Smart Online Voting System
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
