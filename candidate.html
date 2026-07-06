@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candidates</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+margin:0;
+}
+
+header{
+background:#1565C0;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+padding:20px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+img{
+width:120px;
+height:120px;
+border-radius:50%;
+margin-bottom:15px;
+}
+
+h2{
+margin:10px 0;
+color:#1565C0;
+}
+
+.party{
+font-weight:bold;
+color:#444;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+background:#1565C0;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Meet the Candidates</h1>
+</header>
+
+<div class="container">
+
+<div class="card">
+<img src="https://via.placeholder.com/120">
+<h2>Rahul Sharma</h2>
+<p class="party">Future Development Party</p>
+<p><b>Age:</b> 35</p>
+<p><b>Education:</b> MBA</p>
+<p><b>Experience:</b> 8 Years</p>
+<p>Focuses on education, employment, and digital development.</p>
+<button onclick="location.href='vote.html'">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120">
+<h2>Priya Reddy</h2>
+<p class="party">People's Voice Party</p>
+<p><b>Age:</b> 32</p>
+<p><b>Education:</b> M.Tech</p>
+<p><b>Experience:</b> 6 Years</p>
+<p>Works for women's safety and youth empowerment.</p>
+<button onclick="location.href='vote.html'">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120">
+<h2>Arjun Kumar</h2>
+<p class="party">National Progress Party</p>
+<p><b>Age:</b> 38</p>
+<p><b>Education:</b> B.Tech</p>
+<p><b>Experience:</b> 10 Years</p>
+<p>Promotes infrastructure and employment opportunities.</p>
+<button onclick="location.href='vote.html'">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120">
+<h2>Sneha Patel</h2>
+<p class="party">United Citizens Party</p>
+<p><b>Age:</b> 30</p>
+<p><b>Education:</b> MBA</p>
+<p><b>Experience:</b> 5 Years</p>
+<p>Supports healthcare, education, and environmental protection.</p>
+<button onclick="location.href='vote.html'">Vote</button>
+</div>
+
+</div>
+
+</body>
+</html>
