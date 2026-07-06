@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voter Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+color:white;
+}
+
+header{
+background:#0d47a1;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px;
+}
+
+.card{
+background:white;
+color:#333;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 8px 15px rgba(0,0,0,.3);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h2{
+margin:15px 0;
+color:#1565C0;
+}
+
+.card p{
+margin-bottom:20px;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+background:#1565C0;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0d47a1;
+}
+
+footer{
+text-align:center;
+padding:20px;
+margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+🗳️ Smart Online Voting Dashboard
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>👤 My Profile</h2>
+<p>View your registered voter details.</p>
+<button onclick="location.href='profile.html'">Open</button>
+</div>
+
+<div class="card">
+<h2>🏛️ Candidates</h2>
+<p>Read candidate details before voting.</p>
+<button onclick="location.href='candidate.html'">View</button>
+</div>
+
+<div class="card">
+<h2>🗳️ Vote Now</h2>
+<p>Cast your vote securely.</p>
+<button onclick="location.href='vote.html'">Vote</button>
+</div>
+
+<div class="card">
+<h2>📊 Election Results</h2>
+<p>Check the current voting results.</p>
+<button onclick="location.href='results.html'">Results</button>
+</div>
+
+<div class="card">
+<h2>⚙️ Admin Panel</h2>
+<p>Administrator access only.</p>
+<button onclick="location.href='admin.html'">Admin</button>
+</div>
+
+<div class="card">
+<h2>🚪 Logout</h2>
+<p>Exit your voter account safely.</p>
+<button onclick="logout()">Logout</button>
+</div>
+
+</div>
+
+<footer>
+© 2026 Smart Online Voting System
+</footer>
+
+<script>
+function logout(){
+
+localStorage.removeItem("loggedIn");
+
+alert("Logged out successfully.");
+
+window.location="login.html";
+
+}
+</script>
+
+</body>
+</html>
