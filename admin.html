@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef2f7;
+padding:30px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+color:#1565c0;
+margin-bottom:20px;
+}
+
+.login{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+padding:10px;
+margin:5px;
+width:220px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+color:white;
+}
+
+.loginBtn{background:#1565c0;}
+.addBtn{background:#2e7d32;}
+.deleteBtn{background:#d32f2f;}
+.resetBtn{background:#ef6c00;}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+display:none;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
+}
+
+th{
+background:#1565c0;
+color:white;
+}
+
+#adminPanel{
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛠 Admin Dashboard</h1>
+
+<div class="login">
+<input type="text" id="adminUser" placeholder="Admin Username">
+<input type="password" id="adminPass" placeholder="Password">
+<button class="loginBtn" onclick="login()">Login</button>
+</div>
+
+<div id="adminPanel">
+
+<h3>Add Candidate</h3>
+
+<input type="text" id="candidateName" placeholder="Candidate Name">
+<input type="text" id="partyName" placeholder="Party Name">
+
+<button class="addBtn" onclick="addCandidate()">
+Add Candidate
+</button>
+
+<table id="candidateTable">
+
+<tr>
+<th>Candidate</th>
+<th>Party</th>
+<th>Action</th>
+</tr>
+
+</table>
+
+<br>
+
+<button class="resetBtn" onclick="resetElection()">
+Reset Election
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let candidates=JSON.parse(localStorage.getItem("candidates"))||[];
+
+function login(){
+
+let user=document.getElementById("adminUser").value;
+let pass=document.getElementById("adminPass").value;
+
+if(user==="admin" && pass==="admin123"){
+
+document.getElementById("adminPanel").style.display="block";
+document.getElementById("candidateTable").style.display="table";
+
+displayCandidates();
+
+alert("Welcome Admin");
+
+}else{
+
+alert("Invalid Admin Login");
+
+}
+
+}
+
+function addCandidate(){
+
+let name=document.getElementById("candidateName").value;
+let party=document.getElementById("partyName").value;
+
+if(name==""||party==""){
+
+alert("Fill all fields");
+return;
+
+}
+
+candidates.push({name,party});
+
+localStorage.setItem("candidates",JSON.stringify(candidates));
+
+displayCandidates();
+
+document.getElementById("candidateName").value="";
+document.getElementById("partyName").value="";
+
+}
+
+function displayCandidates(){
+
+let table=document.getElementById("candidateTable");
+
+table.innerHTML=`
+<tr>
+<th>Candidate</th>
+<th>Party</th>
+<th>Action</th>
+</tr>`;
+
+candidates.forEach((c,index)=>{
+
+table.innerHTML+=`
+<tr>
+<td>${c.name}</td>
+<td>${c.party}</td>
+<td>
+<button class="deleteBtn" onclick="deleteCandidate(${index})">
+Delete
+</button>
+</td>
+</tr>`;
+
+});
+
+}
+
+function deleteCandidate(index){
+
+candidates.splice(index,1);
+
+localStorage.setItem("candidates",JSON.stringify(candidates));
+
+displayCandidates();
+
+}
+
+function resetElection(){
+
+if(confirm("Reset all votes?")){
+
+localStorage.removeItem("votes");
+localStorage.removeItem("voted");
+
+alert("Election Reset Successfully");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
