@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cast Your Vote</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+header{
+background:#111;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px;
+}
+
+.card{
+background:white;
+color:#333;
+border-radius:15px;
+padding:20px;
+text-align:center;
+box-shadow:0 10px 20px rgba(0,0,0,.3);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #2196F3;
+}
+
+.card h2{
+margin:15px 0 5px;
+}
+
+.card p{
+margin:5px 0;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+background:#2196F3;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0d8bf2;
+}
+
+#msg{
+text-align:center;
+font-size:22px;
+margin:20px;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🗳️ Cast Your Vote
+</header>
+
+<div id="msg"></div>
+
+<div class="container">
+
+<div class="card">
+<img src="https://via.placeholder.com/120" alt="Candidate">
+<h2>Rahul Sharma</h2>
+<p>Future Development Party</p>
+<p>Age: 35</p>
+<button onclick="vote('Rahul Sharma')">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120" alt="Candidate">
+<h2>Priya Reddy</h2>
+<p>People's Voice Party</p>
+<p>Age: 32</p>
+<button onclick="vote('Priya Reddy')">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120" alt="Candidate">
+<h2>Arjun Kumar</h2>
+<p>National Progress Party</p>
+<p>Age: 38</p>
+<button onclick="vote('Arjun Kumar')">Vote</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/120" alt="Candidate">
+<h2>Sneha Patel</h2>
+<p>United Citizens Party</p>
+<p>Age: 30</p>
+<button onclick="vote('Sneha Patel')">Vote</button>
+</div>
+
+</div>
+
+<script>
+
+// Prevent multiple voting
+if(localStorage.getItem("voted")=="yes"){
+document.getElementById("msg").innerHTML="❌ You have already voted.";
+setTimeout(()=>{
+window.location="results.html";
+},2000);
+}
+
+function vote(candidate){
+
+let votes=JSON.parse(localStorage.getItem("votes"))||{};
+
+if(!votes[candidate]){
+votes[candidate]=0;
+}
+
+votes[candidate]++;
+
+localStorage.setItem("votes",JSON.stringify(votes));
+localStorage.setItem("voted","yes");
+
+document.getElementById("msg").innerHTML="✅ Thank you! Your vote has been recorded.";
+
+setTimeout(()=>{
+window.location="results.html";
+},2000);
+
+}
+
+</script>
+
+</body>
+</html>
