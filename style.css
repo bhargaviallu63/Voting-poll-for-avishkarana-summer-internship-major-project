@@ -241,3 +241,13 @@ margin-top:30px;
 }
 
 }
+.container{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:80vh;
+}
+
+.card{
+width:350px;
+}
