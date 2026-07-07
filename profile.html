@@ -1,147 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voter Profile</title>
+
+<title>My Profile</title>
+
+<link rel="stylesheet" href="style.css">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
 
-body{
-background:linear-gradient(135deg,#2193b0,#6dd5ed);
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.card{
-background:#fff;
-width:420px;
+.profile-card{
+max-width:500px;
+margin:40px auto;
+background:white;
 padding:30px;
 border-radius:15px;
-box-shadow:0 10px 20px rgba(0,0,0,.3);
+box-shadow:0 5px 15px rgba(0,0,0,.2);
 text-align:center;
 }
 
 .avatar{
 width:120px;
 height:120px;
-border-radius:50%;
 background:#1565C0;
-color:#fff;
+color:white;
+font-size:50px;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:48px;
-margin:0 auto 20px;
-}
-
-h2{
-color:#1565C0;
+border-radius:50%;
+margin:auto;
 margin-bottom:20px;
 }
 
 .info{
 text-align:left;
-margin:15px 0;
+margin-top:20px;
+}
+
+.info p{
+margin:12px 0;
 font-size:18px;
 }
 
-.info span{
+.buttons{
+margin-top:30px;
+}
+
+.buttons button{
+margin:10px;
+padding:12px 20px;
+}
+
+.status{
 font-weight:bold;
+color:green;
 }
 
-button{
-width:100%;
-padding:12px;
-margin-top:15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-color:white;
-}
-
-.vote{
-background:#2E7D32;
-}
-
-.logout{
-background:#D32F2F;
-}
 </style>
 
 </head>
 
-<body>
+<body onload="loadProfile()">
 
-<div class="card">
+<header>
 
-<div class="avatar">👤</div>
-
-<h2>Voter Profile</h2>
-
-<div class="info">
-<span>Name:</span>
-<p id="name">-</p>
+<div class="logo">
+🗳️ Smart Vote
 </div>
 
-<div class="info">
-<span>Email:</span>
-<p id="email">-</p>
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="vote.html">Vote</a>
+
+<a href="results.html">Results</a>
+
+<a href="profile.html">Profile</a>
+
+</nav>
+
+<button id="darkBtn">🌙</button>
+
+</header>
+
+<div class="profile-card">
+
+<div class="avatar">
+👤
 </div>
 
+<h2 id="name">Voter Name</h2>
+
 <div class="info">
-<span>Voter ID:</span>
-<p id="id">-</p>
+
+<p>
+<b>Email :</b>
+<span id="email"></span>
+</p>
+
+<p>
+<b>Voter ID :</b>
+<span id="voterid"></span>
+</p>
+
+<p>
+<b>Voting Status :</b>
+<span id="status" class="status"></span>
+</p>
+
 </div>
 
-<button class="vote" onclick="location.href='vote.html'">
-🗳️ Cast Vote
+<div class="buttons">
+
+<button onclick="location.href='vote.html'">
+
+🗳️ Vote Now
+
 </button>
 
-<button class="logout" onclick="logout()">
+<button onclick="logout()">
+
 🚪 Logout
+
 </button>
 
 </div>
+
+</div>
+
+<script src="script.js"></script>
 
 <script>
 
-let voter = JSON.parse(localStorage.getItem("voter"));
+function loadProfile(){
+
+checkLogin();
+
+let voter=JSON.parse(localStorage.getItem("voter"));
 
 if(voter){
 
 document.getElementById("name").innerHTML=voter.name;
+
 document.getElementById("email").innerHTML=voter.email;
-document.getElementById("id").innerHTML=voter.voterid;
 
-}else{
-
-alert("Please Register First");
-
-window.location="register.html";
+document.getElementById("voterid").innerHTML=voter.voterid;
 
 }
 
-function logout(){
+if(localStorage.getItem("voted")=="yes"){
 
-localStorage.removeItem("loggedIn");
+document.getElementById("status").innerHTML="✅ Voted";
 
-alert("Logged Out Successfully");
+}
+else{
 
-window.location="login.html";
+document.getElementById("status").innerHTML="❌ Not Voted";
+
+document.getElementById("status").style.color="red";
+
+}
 
 }
 
 </script>
 
 </body>
+
 </html>
