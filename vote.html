@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,41 +11,45 @@
 
 <style>
 
-.notice{
+#msg{
 text-align:center;
-font-size:20px;
-margin:20px;
+font-size:22px;
 font-weight:bold;
-color:#1565C0;
+margin:20px;
 }
 
-.vote-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-padding:30px;
+.vote-card{
+position:relative;
 }
 
-.card img{
-width:120px;
-height:120px;
-border-radius:50%;
+.badge{
+position:absolute;
+top:15px;
+right:15px;
+background:#1565C0;
+color:white;
+padding:5px 12px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
 }
 
-.symbol{
-font-size:35px;
-margin:10px 0;
+.vote-btn{
+width:100%;
+margin-top:15px;
 }
 
 </style>
 
 </head>
 
-<body onload="loadVotePage()">
+<body onload="checkLogin();checkVoteStatus()">
 
 <header>
 
-<div class="logo">🗳️ Smart Vote</div>
+<div class="logo">
+🗳️ Smart Vote
+</div>
 
 <nav>
 
@@ -54,9 +57,9 @@ margin:10px 0;
 
 <a href="candidate.html">Candidates</a>
 
-<a href="results.html">Results</a>
+<a href="vote.html">Vote</a>
 
-<a href="profile.html">Profile</a>
+<a href="results.html">Results</a>
 
 </nav>
 
@@ -64,90 +67,108 @@ margin:10px 0;
 
 </header>
 
-<div class="notice" id="status">
-Select one candidate and cast your vote.
-</div>
+<h1 style="text-align:center;margin-top:25px;">
+Cast Your Vote
+</h1>
 
-<div class="vote-grid">
+<div id="msg"></div>
 
-<div class="card">
+<div class="cards">
 
-<img src="https://via.placeholder.com/120" alt="Candidate">
+<div class="card vote-card">
+
+<div class="badge">🌾</div>
+
+<img src="https://via.placeholder.com/120">
 
 <h2>Rahul Sharma</h2>
 
 <p>Future Development Party</p>
 
-<div class="symbol">🌾</div>
+<button class="vote-btn"
+onclick="vote('Rahul Sharma')">
 
-<button onclick="vote('Rahul Sharma')">
 🗳️ Vote
+
 </button>
 
 </div>
 
-<div class="card">
+<div class="card vote-card">
 
-<img src="https://via.placeholder.com/120" alt="Candidate">
+<div class="badge">🌸</div>
+
+<img src="https://via.placeholder.com/120">
 
 <h2>Priya Reddy</h2>
 
 <p>People's Voice Party</p>
 
-<div class="symbol">🌸</div>
+<button class="vote-btn"
+onclick="vote('Priya Reddy')">
 
-<button onclick="vote('Priya Reddy')">
 🗳️ Vote
+
 </button>
 
 </div>
 
-<div class="card">
+<div class="card vote-card">
 
-<img src="https://via.placeholder.com/120" alt="Candidate">
+<div class="badge">🚲</div>
+
+<img src="https://via.placeholder.com/120">
 
 <h2>Arjun Kumar</h2>
 
 <p>National Progress Party</p>
 
-<div class="symbol">🚲</div>
+<button class="vote-btn"
+onclick="vote('Arjun Kumar')">
 
-<button onclick="vote('Arjun Kumar')">
 🗳️ Vote
+
 </button>
 
 </div>
 
-<div class="card">
+<div class="card vote-card">
 
-<img src="https://via.placeholder.com/120" alt="Candidate">
+<div class="badge">✋</div>
+
+<img src="https://via.placeholder.com/120">
 
 <h2>Sneha Patel</h2>
 
 <p>United Citizens Party</p>
 
-<div class="symbol">✋</div>
+<button class="vote-btn"
+onclick="vote('Sneha Patel')">
 
-<button onclick="vote('Sneha Patel')">
 🗳️ Vote
+
 </button>
 
 </div>
 
 </div>
 
+<footer>
+
+© 2026 Smart Online Voting System
+
+</footer>
+
 <script src="script.js"></script>
 
 <script>
 
-function loadVotePage(){
-
-checkLogin();
+function checkVoteStatus(){
 
 if(localStorage.getItem("voted")=="yes"){
 
-document.getElementById("status").innerHTML=
-"✅ You have already voted.";
+document.getElementById("msg").innerHTML=
+"✅ You have already cast your vote.";
 
 setTimeout(function(){
 
@@ -169,19 +190,30 @@ return;
 
 }
 
-if(confirm("Confirm your vote for " + candidate + "?")){
+if(confirm("Confirm your vote for "+candidate+" ?")){
 
 let votes=JSON.parse(localStorage.getItem("votes"))||{};
 
-votes[candidate]=(votes[candidate]||0)+1;
+if(!votes[candidate]){
+
+votes[candidate]=0;
+
+}
+
+votes[candidate]++;
 
 localStorage.setItem("votes",JSON.stringify(votes));
 
 localStorage.setItem("voted","yes");
 
-alert("🎉 Your vote has been recorded successfully!");
+document.getElementById("msg").innerHTML=
+"🎉 Thank you! Your vote has been recorded successfully.";
+
+setTimeout(function(){
 
 window.location="results.html";
+
+},2000);
 
 }
 
@@ -191,3 +223,4 @@ window.location="results.html";
 
 </body>
 </html>
+
