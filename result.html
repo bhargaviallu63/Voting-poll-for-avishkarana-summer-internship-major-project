@@ -1,46 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Election Results</title>
 
+<link rel="stylesheet" href="style.css">
+
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
 
-body{
-background:linear-gradient(135deg,#1e3c72,#2a5298);
-color:white;
-padding:30px;
-}
-
-h1{
-text-align:center;
-margin-bottom:30px;
+.results{
+max-width:900px;
+margin:40px auto;
+padding:20px;
 }
 
 .result-card{
-background:white;
-color:#333;
+background:#fff;
 padding:20px;
 border-radius:15px;
-margin:20px auto;
-max-width:700px;
-box-shadow:0 10px 20px rgba(0,0,0,.3);
-}
-
-.row{
-margin:20px 0;
-}
-
-.name{
-font-weight:bold;
-margin-bottom:8px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
 .progress{
@@ -49,135 +31,172 @@ height:25px;
 background:#ddd;
 border-radius:20px;
 overflow:hidden;
+margin-top:10px;
 }
 
 .bar{
 height:100%;
-background:#4CAF50;
-width:0%;
-color:white;
+background:#1565C0;
 text-align:right;
 padding-right:10px;
+color:#fff;
 line-height:25px;
-transition:1s;
+font-weight:bold;
+transition:width 1s;
 }
 
 #winner{
-margin-top:30px;
 text-align:center;
 font-size:28px;
 font-weight:bold;
-color:yellow;
+color:#1565C0;
+margin:30px 0;
 }
 
-.buttons{
+#totalVotes{
+text-align:center;
+font-size:20px;
+margin-bottom:20px;
+font-weight:bold;
+}
+
+.actions{
 text-align:center;
 margin-top:30px;
 }
 
-button{
-padding:12px 25px;
+.actions button{
 margin:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
 }
 
-.home{
-background:#2196F3;
-color:white;
-}
-
-.reset{
-background:#f44336;
-color:white;
-}
-
-button:hover{
-opacity:.9;
-}
 </style>
 
 </head>
 
 <body>
 
-<h1>📊 Election Results</h1>
+<header>
 
-<div class="result-card" id="results"></div>
+<div class="logo">
+🗳️ Smart Vote
+</div>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="vote.html">Vote</a>
+
+<a href="results.html">Results</a>
+
+</nav>
+
+<button id="darkBtn">🌙</button>
+
+</header>
+
+<h1 style="text-align:center;margin-top:30px;">
+📊 Election Results
+</h1>
 
 <div id="winner"></div>
 
-<div class="buttons">
+<div id="totalVotes"></div>
 
-<button class="home" onclick="location.href='index.html'">
-🏠 Home
+<div class="results" id="results"></div>
+
+<div class="actions">
+
+<button onclick="location.href='dashboard.html'">
+🏠 Dashboard
 </button>
 
-<button class="reset" onclick="resetElection()">
+<button onclick="resetElection()">
 🔄 Reset Election
 </button>
 
 </div>
 
+<script src="script.js"></script>
+
 <script>
 
-let votes = JSON.parse(localStorage.getItem("votes")) || {};
+const votes = JSON.parse(localStorage.getItem("votes")) || {};
 
-let resultDiv = document.getElementById("results");
+const results = document.getElementById("results");
 
-let totalVotes = 0;
+let total = 0;
 
-for(let c in votes){
-totalVotes += votes[c];
+for(let candidate in votes){
+total += votes[candidate];
 }
+
+document.getElementById("totalVotes").innerHTML =
+"Total Votes : " + total;
 
 let winner = "";
 let highest = 0;
 
-for(let c in votes){
+for(let candidate in votes){
 
-let percentage = totalVotes == 0 ? 0 : Math.round((votes[c]/totalVotes)*100);
+let percent = total==0 ? 0 :
+Math.round((votes[candidate]/total)*100);
 
-resultDiv.innerHTML += `
-<div class="row">
-<div class="name">${c} - ${votes[c]} Vote(s)</div>
+results.innerHTML += `
+
+<div class="result-card">
+
+<h2>${candidate}</h2>
+
+<p>Votes : ${votes[candidate]}</p>
+
 <div class="progress">
-<div class="bar" style="width:${percentage}%">
-${percentage}%
+
+<div class="bar"
+style="width:${percent}%">
+
+${percent}%
+
 </div>
+
 </div>
+
 </div>
+
 `;
 
-if(votes[c] > highest){
-highest = votes[c];
-winner = c;
-}
+if(votes[candidate] > highest){
+
+highest = votes[candidate];
+
+winner = candidate;
 
 }
 
-if(totalVotes==0){
+}
 
-document.getElementById("winner").innerHTML="No votes have been cast yet.";
+if(total==0){
 
-}else{
+document.getElementById("winner").innerHTML =
+"❌ No votes have been cast.";
 
-document.getElementById("winner").innerHTML=
-"🏆 Winner: " + winner;
+}
+else{
+
+document.getElementById("winner").innerHTML =
+"🏆 Winner : " + winner;
 
 }
 
 function resetElection(){
 
-if(confirm("Are you sure you want to reset all votes?")){
+if(confirm("Reset all election data?")){
 
 localStorage.removeItem("votes");
-localStorage.removeItem("voted");
-localStorage.removeItem("loggedIn");
 
-alert("Election has been reset.");
+localStorage.removeItem("voted");
+
+alert("Election reset successfully!");
 
 location.reload();
 
